@@ -1,0 +1,58 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.14kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 1.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 266B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 3.56kB done
+#4 DONE 0.0s
+
+#5 [deps 1/4] FROM docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
+#5 resolve docker.io/library/node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 0.0s done
+#5 DONE 0.0s
+
+#6 [deps 2/4] WORKDIR /app
+#6 CACHED
+
+#7 [deps 3/4] COPY package.json package-lock.json ./
+#7 DONE 0.0s
+
+#8 [deps 4/4] RUN npm ci --omit=dev
+#8 2.809 
+#8 2.809 added 82 packages, and audited 83 packages in 2s
+#8 2.809 
+#8 2.809 28 packages are looking for funding
+#8 2.809   run `npm fund` for details
+#8 2.812 
+#8 2.812 found 0 vulnerabilities
+#8 DONE 3.0s
+
+#9 [stage-1 3/5] COPY --from=deps /app/node_modules ./node_modules
+#9 DONE 0.1s
+
+#10 [stage-1 4/5] COPY package.json ./
+#10 DONE 0.0s
+
+#11 [stage-1 5/5] COPY src ./src
+#11 DONE 0.0s
+
+#12 exporting to image
+#12 exporting layers
+#12 exporting layers 0.3s done
+#12 exporting manifest sha256:12204b8139d1d1193e6388ac11587b7bd18885bcd32036566f03f11c1be4dd16 done
+#12 exporting config sha256:d893f9e1bdff8374aedd51c2d1d29419b63000d42a9529ab66b7df199a3f4d0c done
+#12 exporting attestation manifest sha256:ff8d824e4c8b9967b2292a45e173f0069f4845996b815631c490b59a3c43f02b 0.0s done
+#12 exporting manifest list sha256:81825e3f9d276a79b3bbaf91238781566c465131cfa4885071d09deab55cf4e4 0.0s done
+#12 naming to docker.io/library/technova-reservas-api:1.0 done
+#12 unpacking to docker.io/library/technova-reservas-api:1.0
+#12 unpacking to docker.io/library/technova-reservas-api:1.0 0.2s done
+#12 DONE 0.6s
+Usuario da imagem: node

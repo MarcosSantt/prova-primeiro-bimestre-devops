@@ -56,3 +56,5 @@
 #12 unpacking to docker.io/library/technova-reservas-api:1.0 0.2s done
 #12 DONE 0.6s
 Usuario da imagem: node
+IMAGE                       ID             DISK USAGE   CONTENT SIZE   EXTRA
+technova-reservas-api:1.0   81825e3f9d27        244MB         61.5MB        

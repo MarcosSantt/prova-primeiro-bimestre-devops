@@ -1,0 +1,57 @@
+name: technova-reservas
+
+services:
+  # ---------- Banco de dados PostgreSQL ----------
+  db:
+    image: postgres:16-alpine
+    container_name: technova-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:?defina DB_USER no arquivo .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?defina DB_PASSWORD no arquivo .env}
+      POSTGRES_DB: ${DB_NAME:?defina DB_NAME no arquivo .env}
+    volumes:
+      # Volume nomeado: os dados sobrevivem mesmo se o container for removido
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - technova-net
+    # Sem "ports": o banco NÃO fica acessível de fora, só pela rede interna
+    healthcheck:
+      # -h 127.0.0.1 testa via TCP, evitando falso "pronto" durante a inicialização
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # ---------- API de Reservas ----------
+  api:
+    build: ./app
+    image: technova-reservas-api:1.0
+    container_name: technova-api
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      DB_HOST: db # nome do serviço acima, resolvido pelo DNS interno da rede
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_SSL: "false"
+    ports:
+      - "${API_PORT:-3000}:3000"
+    depends_on:
+      db:
+        # Só inicia a API quando o healthcheck do banco estiver OK
+        condition: service_healthy
+    networks:
+      - technova-net
+
+volumes:
+  pgdata:
+    name: technova-pgdata
+
+networks:
+  technova-net:
+    name: technova-net
+    driver: bridge

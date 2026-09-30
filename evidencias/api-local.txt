@@ -1,0 +1,58 @@
+### curl localhost:3000/health
+{"status":"ok","banco":"conectado"}
+HTTP 200
+
+### curl -X POST localhost:3000/reservas -H Content-Type: application/json -d {"cliente":"Ana Souza","data":"2026-10-15"}
+{"id":1,"cliente":"Ana Souza","data":"2026-10-15","status":"pendente"}
+HTTP 201
+
+### curl -X POST localhost:3000/reservas -H Content-Type: application/json -d {"cliente":"Bruno Lima","data":"2026-10-20","status":"confirmada"}
+{"id":2,"cliente":"Bruno Lima","data":"2026-10-20","status":"confirmada"}
+HTTP 201
+
+### curl localhost:3000/reservas
+[{"id":1,"cliente":"Ana Souza","data":"2026-10-15","status":"pendente"},{"id":2,"cliente":"Bruno Lima","data":"2026-10-20","status":"confirmada"}]
+HTTP 200
+
+### curl localhost:3000/reservas/1
+{"id":1,"cliente":"Ana Souza","data":"2026-10-15","status":"pendente"}
+HTTP 200
+
+### curl -X PUT localhost:3000/reservas/1 -H Content-Type: application/json -d {"cliente":"Ana Souza","data":"2026-10-16","status":"confirmada"}
+{"id":1,"cliente":"Ana Souza","data":"2026-10-16","status":"confirmada"}
+HTTP 200
+
+### curl localhost:3000/reservas/2
+{"id":2,"cliente":"Bruno Lima","data":"2026-10-20","status":"confirmada"}
+HTTP 200
+
+### docker compose down + up (sem -v)
+### curl localhost:3000/reservas
+[{"id":1,"cliente":"Ana Souza","data":"2026-10-16","status":"confirmada"},{"id":2,"cliente":"Bruno Lima","data":"2026-10-20","status":"confirmada"}]
+HTTP 200
+
+### SELECT direto no PostgreSQL
+ id |  cliente   |    data    |   status   
+----+------------+------------+------------
+  1 | Ana Souza  | 2026-10-16 | confirmada
+  2 | Bruno Lima | 2026-10-20 | confirmada
+(2 rows)
+
+### curl -X DELETE localhost:3000/reservas/2
+
+HTTP 204
+
+### curl localhost:3000/reservas/2
+{"erro":"Reserva não encontrada"}
+HTTP 404
+
+### curl localhost:3000/reservas
+[{"id":1,"cliente":"Ana Souza","data":"2026-10-16","status":"confirmada"}]
+HTTP 200
+
+### SELECT direto no PostgreSQL (após DELETE)
+ id |  cliente  |    data    |   status   
+----+-----------+------------+------------
+  1 | Ana Souza | 2026-10-16 | confirmada
+(1 row)
+

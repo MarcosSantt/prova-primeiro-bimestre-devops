@@ -1,0 +1,13 @@
+# Dependências são instaladas dentro da imagem (npm ci)
+node_modules
+npm-debug.log*
+
+# Segredos nunca entram na imagem
+.env
+.env.*
+
+# Arquivos que não são necessários para rodar a API
+Dockerfile
+.dockerignore
+*.md
+.git

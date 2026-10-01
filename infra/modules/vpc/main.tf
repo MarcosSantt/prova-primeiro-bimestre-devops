@@ -1,7 +1,3 @@
-locals {
-  nome = "technova-${var.ambiente}"
-}
-
 # Duas zonas de disponibilidade da região (o RDS exige subnets em 2 AZs)
 data "aws_availability_zones" "disponiveis" {
   state = "available"
@@ -14,7 +10,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true # necessário para resolver o endpoint do RDS
 
   tags = {
-    Name = "${local.nome}-vpc"
+    Name = "${var.nome}-vpc"
   }
 }
 
@@ -22,7 +18,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${local.nome}-igw"
+    Name = "${var.nome}-igw"
   }
 }
 
@@ -36,7 +32,7 @@ resource "aws_subnet" "publica" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${local.nome}-publica-${count.index + 1}"
+    Name = "${var.nome}-publica-${count.index + 1}"
   }
 }
 
@@ -50,7 +46,7 @@ resource "aws_route_table" "publica" {
   }
 
   tags = {
-    Name = "${local.nome}-rt-publica"
+    Name = "${var.nome}-rt-publica"
   }
 }
 
@@ -71,7 +67,7 @@ resource "aws_subnet" "privada" {
   availability_zone = data.aws_availability_zones.disponiveis.names[count.index]
 
   tags = {
-    Name = "${local.nome}-privada-${count.index + 1}"
+    Name = "${var.nome}-privada-${count.index + 1}"
   }
 }
 
@@ -79,7 +75,7 @@ resource "aws_route_table" "privada" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "${local.nome}-rt-privada"
+    Name = "${var.nome}-rt-privada"
   }
 }
 

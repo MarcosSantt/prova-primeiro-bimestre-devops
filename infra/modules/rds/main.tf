@@ -8,19 +8,19 @@ resource "random_password" "db" {
 }
 
 resource "aws_db_subnet_group" "main" {
-  name       = "${local.nome}-db-subnets"
-  subnet_ids = aws_subnet.privada[*].id
+  name       = "${var.nome}-db-subnets"
+  subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "${local.nome}-db-subnets"
+    Name = "${var.nome}-db-subnets"
   }
 }
 
 resource "aws_db_instance" "postgres" {
-  identifier     = "${local.nome}-postgres"
+  identifier     = "${var.nome}-postgres"
   engine         = "postgres"
-  engine_version = "16"
-  instance_class = var.db_instance_class
+  engine_version = var.engine_version
+  instance_class = var.instance_class
 
   allocated_storage = 20
   storage_type      = "gp3"
@@ -31,7 +31,7 @@ resource "aws_db_instance" "postgres" {
   password = random_password.db.result
 
   db_subnet_group_name   = aws_db_subnet_group.main.name
-  vpc_security_group_ids = [aws_security_group.db.id]
+  vpc_security_group_ids = var.security_group_ids
   publicly_accessible    = false
   multi_az               = false
 
@@ -43,6 +43,6 @@ resource "aws_db_instance" "postgres" {
   apply_immediately   = true
 
   tags = {
-    Name = "${local.nome}-postgres"
+    Name = "${var.nome}-postgres"
   }
 }

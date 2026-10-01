@@ -33,5 +33,5 @@ docker run -d \
   --name technova-api \
   --restart unless-stopped \
   --env-file /opt/technova/api.env \
-  -p 80:3000 \
+  -p ${api_port}:3000 \
   technova-reservas-api:1.0

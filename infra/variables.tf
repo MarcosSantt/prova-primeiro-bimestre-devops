@@ -47,9 +47,15 @@ variable "ssh_allowed_cidr" {
 
 # ===== EC2 =====
 variable "instance_type" {
-  description = "Tipo da instância EC2 da API"
+  description = "Tipo da instância EC2 da API (a prova pede t2.micro)"
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
+}
+
+variable "api_port" {
+  description = "Porta pública da API na EC2 (liberada no security group)"
+  type        = number
+  default     = 3000
 }
 
 variable "key_name" {

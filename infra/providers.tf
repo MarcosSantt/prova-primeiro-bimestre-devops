@@ -1,5 +1,5 @@
 # Projeto principal da infraestrutura (VPC + EC2 + RDS)
-# O state fica no bucket S3 criado em infra/bootstrap, com lock no DynamoDB.
+# O state fica no bucket S3 criado em infra/backend, com lock no DynamoDB.
 
 terraform {
   required_version = ">= 1.5"
@@ -15,7 +15,7 @@ terraform {
     }
   }
 
-  # Backend não aceita variáveis: os valores vêm dos outputs do bootstrap
+  # Backend não aceita variáveis: os valores vêm dos outputs de infra/backend
   backend "s3" {
     bucket         = "technova-tfstate-6325127"
     key            = "technova/terraform.tfstate"

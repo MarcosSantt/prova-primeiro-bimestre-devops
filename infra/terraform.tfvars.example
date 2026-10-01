@@ -1,0 +1,6 @@
+# Modelo de variáveis do projeto principal
+# Uso: cp terraform.tfvars.example terraform.tfvars   e ajuste os valores
+# O terraform.tfvars NÃO vai para o Git (já está no .gitignore)
+
+# Seu IP público com /32 (descubra com: curl -s https://checkip.amazonaws.com)
+ssh_allowed_cidr = "203.0.113.10/32"

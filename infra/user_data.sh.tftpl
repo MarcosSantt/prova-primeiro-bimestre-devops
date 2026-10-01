@@ -1,0 +1,37 @@
+#!/bin/bash
+# Executado uma vez, como root, no primeiro boot da EC2.
+# Log completo em /var/log/user-data.log
+set -euxo pipefail
+exec > >(tee /var/log/user-data.log) 2>&1
+
+# ---------- Docker e Git ----------
+dnf install -y docker git
+systemctl enable --now docker
+usermod -aG docker ec2-user
+
+# ---------- Código da aplicação ----------
+git clone --depth 1 --branch "${repo_branch}" "${repo_url}" /opt/technova
+docker build -t technova-reservas-api:1.0 /opt/technova/app
+
+# ---------- Variáveis da API ----------
+# Arquivo legível só pelo root; delimitador entre aspas evita que o bash
+# interprete caracteres especiais da senha
+install -m 600 /dev/null /opt/technova/api.env
+cat > /opt/technova/api.env <<'EOF'
+PORT=3000
+DB_HOST=${db_host}
+DB_PORT=${db_port}
+DB_NAME=${db_name}
+DB_USER=${db_user}
+DB_PASSWORD=${db_password}
+DB_SSL=true
+EOF
+
+# ---------- Sobe a API ----------
+# --restart: se o RDS ainda não aceitar conexões, a API sai e o Docker tenta de novo
+docker run -d \
+  --name technova-api \
+  --restart unless-stopped \
+  --env-file /opt/technova/api.env \
+  -p 80:3000 \
+  technova-reservas-api:1.0

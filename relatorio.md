@@ -52,10 +52,17 @@ com healthcheck e `depends_on`), lia o código gerado, rodava localmente e só e
 Nessa parte a IA gerou código que funcionou de primeira, sem erros relevantes; o que fiz foi conferir
 se cada requisito do enunciado estava atendido (volume nomeado, rede customizada, `.env` fora do Git).
 
-Na parte de Terraform usei o **Claude Code** no terminal, com acesso ao repositório. Os prompts
-principais foram: "onde paramos?" (ele leu o repositório e o state para reconstruir o contexto),
-pedir para finalizar o bootstrap do state remoto, escolher a arquitetura (EC2 + RDS) e, depois,
-**colar o enunciado completo da prova** pedindo para comparar item por item com o que já existia.
+Na parte de Terraform usei o **Claude Code** no terminal, com acesso ao repositório. O prompt que
+guiou o trabalho foi pedir para o Claude **ir me passando o passo a passo, se baseando nos TFs que
+fizemos nas aulas**, para que a solução seguisse o que aprendi e eu executasse e entendesse cada
+etapa. No meio do trabalho fechei a aba e **perdi o histórico da conversa**, por isso a sessão
+seguinte começa com o prompt "onde paramos?": sem memória da conversa anterior, o Claude precisou
+reconstruir o contexto lendo o repositório, os commits, os arquivos `.tf` e o state (foi assim que
+descobriu que o primeiro `apply` do backend tinha ficado incompleto). Os outros prompts principais
+foram pedir para finalizar o bootstrap do state remoto, escolher a arquitetura (EC2 + RDS) e,
+depois, **colar o enunciado completo da prova** pedindo para comparar item por item com o que já
+existia. Isso mostrou na prática que o Git também serve como "memória" do projeto quando o
+contexto da IA se perde.
 Não usei o Kiro Spec, mas acabei seguindo um fluxo parecido de requisitos → design → tarefas: o
 enunciado funcionou como especificação, a IA montou uma tabela de lacunas e as tarefas foram
 executadas e validadas uma a uma.

@@ -1,0 +1,27 @@
+╷
+│ Warning: Deprecated Parameter
+│ 
+│ The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+│ instead.
+╵
+Acquiring state lock. This may take a few moments...
+module.ec2.aws_instance.api: Destroying... [id=i-081e5c4ecf2af3cfa]
+module.security_group.aws_vpc_security_group_ingress_rule.ec2_api: Modifying... [id=sgr-0b10a12b3624fc2c3]
+module.security_group.aws_vpc_security_group_ingress_rule.ec2_api: Modifications complete after 1s [id=sgr-0b10a12b3624fc2c3]
+module.ec2.aws_instance.api: Still destroying... [id=i-081e5c4ecf2af3cfa, 00m10s elapsed]
+module.ec2.aws_instance.api: Still destroying... [id=i-081e5c4ecf2af3cfa, 00m20s elapsed]
+module.ec2.aws_instance.api: Still destroying... [id=i-081e5c4ecf2af3cfa, 00m30s elapsed]
+module.ec2.aws_instance.api: Destruction complete after 31s
+module.ec2.aws_instance.api: Creating...
+module.ec2.aws_instance.api: Still creating... [00m10s elapsed]
+module.ec2.aws_instance.api: Creation complete after 15s [id=i-0a5c95964761db4d4]
+
+Apply complete! Resources: 1 added, 1 changed, 1 destroyed.
+
+Outputs:
+
+api_health_url = "http://54.165.97.61:3000/health"
+api_url = "http://54.165.97.61:3000"
+ec2_public_ip = "54.165.97.61"
+rds_endpoint = "technova-prod-postgres.cppfc7bahgtv.us-east-1.rds.amazonaws.com"
+vpc_id = "vpc-05c0ee5354f012bdf"

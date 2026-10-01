@@ -1,0 +1,355 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.rds.random_password.db: Refreshing state... [id=none]
+module.vpc.data.aws_availability_zones.disponiveis: Reading...
+module.ec2.data.aws_ami.al2023: Reading...
+module.vpc.aws_vpc.main: Refreshing state... [id=vpc-05c0ee5354f012bdf]
+module.vpc.data.aws_availability_zones.disponiveis: Read complete after 1s [id=us-east-1]
+module.ec2.data.aws_ami.al2023: Read complete after 2s [id=ami-03c3da4cfa8e8943a]
+module.vpc.aws_internet_gateway.main: Refreshing state... [id=igw-0512c6cc5bbe1a8a8]
+module.vpc.aws_route_table.privada: Refreshing state... [id=rtb-09263cc9e7986deb3]
+module.security_group.aws_security_group.ec2: Refreshing state... [id=sg-007d0040706db80a3]
+module.vpc.aws_subnet.privada[1]: Refreshing state... [id=subnet-0a5aa6d792c632ed1]
+module.vpc.aws_subnet.publica[0]: Refreshing state... [id=subnet-007cdb73b44368820]
+module.vpc.aws_subnet.publica[1]: Refreshing state... [id=subnet-0e3f9db83a15615af]
+module.security_group.aws_security_group.rds: Refreshing state... [id=sg-0a177d109f4bf6ec1]
+module.vpc.aws_subnet.privada[0]: Refreshing state... [id=subnet-03642103b1840f616]
+module.vpc.aws_route_table.publica: Refreshing state... [id=rtb-0478749912c33294d]
+module.security_group.aws_vpc_security_group_egress_rule.ec2_saida: Refreshing state... [id=sgr-042a9f05f24ddedab]
+module.security_group.aws_vpc_security_group_ingress_rule.ec2_api: Refreshing state... [id=sgr-0b10a12b3624fc2c3]
+module.security_group.aws_vpc_security_group_ingress_rule.ec2_ssh: Refreshing state... [id=sgr-047f144fa12ac3e98]
+module.security_group.aws_vpc_security_group_ingress_rule.rds_postgres: Refreshing state... [id=sgr-09a41672230beb0c5]
+module.vpc.aws_route_table_association.publica[0]: Refreshing state... [id=rtbassoc-0970f8b76cbc122bd]
+module.vpc.aws_route_table_association.publica[1]: Refreshing state... [id=rtbassoc-0cb62e10213914c15]
+module.vpc.aws_route_table_association.privada[0]: Refreshing state... [id=rtbassoc-02bae75a35544b05f]
+module.vpc.aws_route_table_association.privada[1]: Refreshing state... [id=rtbassoc-07bb1e22cf2c75324]
+module.rds.aws_db_subnet_group.main: Refreshing state... [id=technova-prod-db-subnets]
+module.rds.aws_db_instance.postgres: Refreshing state... [id=db-HNSNJE6NYMZBUSQX23FCZQF5LI]
+module.ec2.aws_instance.api: Refreshing state... [id=i-081e5c4ecf2af3cfa]
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # module.ec2.aws_instance.api has changed
+  # (moved from aws_instance.api)
+  ~ resource "aws_instance" "api" {
+        id                                   = "i-081e5c4ecf2af3cfa"
+      ~ public_ip                            = "54.172.209.136" -> "18.232.66.240"
+        tags                                 = {
+            "Name" = "technova-prod-api"
+        }
+        # (39 unchanged attributes hidden)
+
+        # (8 unchanged blocks hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # module.ec2.aws_instance.api must be replaced
+  # (moved from aws_instance.api)
+-/+ resource "aws_instance" "api" {
+      ~ arn                                  = "arn:aws:ec2:us-east-1:436894295513:instance/i-081e5c4ecf2af3cfa" -> (known after apply)
+      ~ associate_public_ip_address          = true -> (known after apply)
+      ~ availability_zone                    = "us-east-1a" -> (known after apply)
+      ~ cpu_core_count                       = 1 -> (known after apply)
+      ~ cpu_threads_per_core                 = 2 -> (known after apply)
+      ~ disable_api_stop                     = false -> (known after apply)
+      ~ disable_api_termination              = false -> (known after apply)
+      ~ ebs_optimized                        = false -> (known after apply)
+      + enable_primary_ipv6                  = (known after apply)
+      - hibernation                          = false -> null
+      + host_id                              = (known after apply)
+      + host_resource_group_arn              = (known after apply)
+      ~ id                                   = "i-081e5c4ecf2af3cfa" -> (known after apply)
+      ~ instance_initiated_shutdown_behavior = "stop" -> (known after apply)
+      + instance_lifecycle                   = (known after apply)
+      ~ instance_state                       = "running" -> (known after apply)
+      ~ instance_type                        = "t3.micro" -> "t2.micro"
+      ~ ipv6_address_count                   = 0 -> (known after apply)
+      ~ ipv6_addresses                       = [] -> (known after apply)
+      ~ monitoring                           = false -> (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      ~ placement_partition_number           = 0 -> (known after apply)
+      ~ primary_network_interface_id         = "eni-02190b0bfafe4fea2" -> (known after apply)
+      ~ private_dns                          = "ip-10-0-1-233.ec2.internal" -> (known after apply)
+      ~ private_ip                           = "10.0.1.233" -> (known after apply)
+      ~ public_dns                           = "ec2-18-232-66-240.compute-1.amazonaws.com" -> (known after apply)
+      ~ public_ip                            = "18.232.66.240" -> (known after apply)
+      ~ secondary_private_ips                = [] -> (known after apply)
+      ~ security_groups                      = [] -> (known after apply)
+      + spot_instance_request_id             = (known after apply)
+        tags                                 = {
+            "Name" = "technova-prod-api"
+        }
+      ~ tenancy                              = "default" -> (known after apply)
+      ~ user_data                            = (sensitive value) # forces replacement
+      + user_data_base64                     = (known after apply)
+        # (9 unchanged attributes hidden)
+
+      ~ capacity_reservation_specification (known after apply)
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "open" -> null
+        }
+
+      ~ cpu_options (known after apply)
+      - cpu_options {
+          - core_count       = 1 -> null
+          - threads_per_core = 2 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - credit_specification {
+          - cpu_credits = "unlimited" -> null
+        }
+
+      ~ ebs_block_device (known after apply)
+
+      ~ enclave_options (known after apply)
+      - enclave_options {
+          - enabled = false -> null
+        }
+
+      ~ ephemeral_block_device (known after apply)
+
+      ~ instance_market_options (known after apply)
+
+      ~ maintenance_options (known after apply)
+      - maintenance_options {
+          - auto_recovery = "default" -> null
+        }
+
+      ~ metadata_options {
+          ~ http_put_response_hop_limit = 2 -> (known after apply)
+          ~ instance_metadata_tags      = "disabled" -> (known after apply)
+            # (3 unchanged attributes hidden)
+        }
+
+      ~ network_interface (known after apply)
+
+      ~ private_dns_name_options (known after apply)
+      - private_dns_name_options {
+          - enable_resource_name_dns_a_record    = false -> null
+          - enable_resource_name_dns_aaaa_record = false -> null
+          - hostname_type                        = "ip-name" -> null
+        }
+
+      ~ root_block_device {
+          ~ device_name           = "/dev/xvda" -> (known after apply)
+          ~ iops                  = 3000 -> (known after apply)
+          ~ kms_key_id            = "arn:aws:kms:us-east-1:436894295513:key/b556c4eb-e778-4da3-98a4-cafb52a4fcdf" -> (known after apply)
+          - tags                  = {} -> null
+          ~ tags_all              = {
+              - "Ambiente"      = "prod"
+              - "GerenciadoPor" = "terraform"
+              - "Projeto"       = "technova-reservas"
+              - "Responsavel"   = "6325127"
+            } -> (known after apply)
+          ~ throughput            = 125 -> (known after apply)
+          ~ volume_id             = "vol-078b2486776164d40" -> (known after apply)
+            # (4 unchanged attributes hidden)
+        }
+    }
+
+  # aws_db_instance.postgres has moved to module.rds.aws_db_instance.postgres
+    resource "aws_db_instance" "postgres" {
+        id                                    = "db-HNSNJE6NYMZBUSQX23FCZQF5LI"
+        tags                                  = {
+            "Name" = "technova-prod-postgres"
+        }
+        # (72 unchanged attributes hidden)
+    }
+
+  # aws_db_subnet_group.main has moved to module.rds.aws_db_subnet_group.main
+    resource "aws_db_subnet_group" "main" {
+        id                      = "technova-prod-db-subnets"
+        name                    = "technova-prod-db-subnets"
+        tags                    = {
+            "Name" = "technova-prod-db-subnets"
+        }
+        # (7 unchanged attributes hidden)
+    }
+
+  # random_password.db has moved to module.rds.random_password.db
+    resource "random_password" "db" {
+        id               = "none"
+        # (13 unchanged attributes hidden)
+    }
+
+  # aws_security_group.api has moved to module.security_group.aws_security_group.ec2
+    resource "aws_security_group" "ec2" {
+        id                     = "sg-007d0040706db80a3"
+        name                   = "technova-prod-api-sg"
+        tags                   = {
+            "Name" = "technova-prod-api-sg"
+        }
+        # (9 unchanged attributes hidden)
+    }
+
+  # aws_security_group.db has moved to module.security_group.aws_security_group.rds
+    resource "aws_security_group" "rds" {
+        id                     = "sg-0a177d109f4bf6ec1"
+        name                   = "technova-prod-db-sg"
+        tags                   = {
+            "Name" = "technova-prod-db-sg"
+        }
+        # (9 unchanged attributes hidden)
+    }
+
+  # aws_vpc_security_group_egress_rule.api_saida has moved to module.security_group.aws_vpc_security_group_egress_rule.ec2_saida
+    resource "aws_vpc_security_group_egress_rule" "ec2_saida" {
+        id                     = "sgr-042a9f05f24ddedab"
+        # (7 unchanged attributes hidden)
+    }
+
+  # module.security_group.aws_vpc_security_group_ingress_rule.ec2_api will be updated in-place
+  # (moved from aws_vpc_security_group_ingress_rule.api_http)
+  ~ resource "aws_vpc_security_group_ingress_rule" "ec2_api" {
+      ~ description            = "HTTP da API" -> "Porta da API"
+      ~ from_port              = 80 -> 3000
+        id                     = "sgr-0b10a12b3624fc2c3"
+      ~ to_port                = 80 -> 3000
+        # (6 unchanged attributes hidden)
+    }
+
+  # aws_vpc_security_group_ingress_rule.api_ssh has moved to module.security_group.aws_vpc_security_group_ingress_rule.ec2_ssh
+    resource "aws_vpc_security_group_ingress_rule" "ec2_ssh" {
+        id                     = "sgr-047f144fa12ac3e98"
+        # (9 unchanged attributes hidden)
+    }
+
+  # aws_vpc_security_group_ingress_rule.db_postgres has moved to module.security_group.aws_vpc_security_group_ingress_rule.rds_postgres
+    resource "aws_vpc_security_group_ingress_rule" "rds_postgres" {
+        id                           = "sgr-09a41672230beb0c5"
+        # (9 unchanged attributes hidden)
+    }
+
+  # aws_internet_gateway.main has moved to module.vpc.aws_internet_gateway.main
+    resource "aws_internet_gateway" "main" {
+        id       = "igw-0512c6cc5bbe1a8a8"
+        tags     = {
+            "Name" = "technova-prod-igw"
+        }
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_route_table.privada has moved to module.vpc.aws_route_table.privada
+    resource "aws_route_table" "privada" {
+        id               = "rtb-09263cc9e7986deb3"
+        tags             = {
+            "Name" = "technova-prod-rt-privada"
+        }
+        # (6 unchanged attributes hidden)
+    }
+
+  # aws_route_table.publica has moved to module.vpc.aws_route_table.publica
+    resource "aws_route_table" "publica" {
+        id               = "rtb-0478749912c33294d"
+        tags             = {
+            "Name" = "technova-prod-rt-publica"
+        }
+        # (6 unchanged attributes hidden)
+    }
+
+  # aws_route_table_association.privada[0] has moved to module.vpc.aws_route_table_association.privada[0]
+    resource "aws_route_table_association" "privada" {
+        id             = "rtbassoc-02bae75a35544b05f"
+        # (3 unchanged attributes hidden)
+    }
+
+  # aws_route_table_association.privada[1] has moved to module.vpc.aws_route_table_association.privada[1]
+    resource "aws_route_table_association" "privada" {
+        id             = "rtbassoc-07bb1e22cf2c75324"
+        # (3 unchanged attributes hidden)
+    }
+
+  # aws_route_table_association.publica[0] has moved to module.vpc.aws_route_table_association.publica[0]
+    resource "aws_route_table_association" "publica" {
+        id             = "rtbassoc-0970f8b76cbc122bd"
+        # (3 unchanged attributes hidden)
+    }
+
+  # aws_route_table_association.publica[1] has moved to module.vpc.aws_route_table_association.publica[1]
+    resource "aws_route_table_association" "publica" {
+        id             = "rtbassoc-0cb62e10213914c15"
+        # (3 unchanged attributes hidden)
+    }
+
+  # aws_subnet.privada[0] has moved to module.vpc.aws_subnet.privada[0]
+    resource "aws_subnet" "privada" {
+        id                                             = "subnet-03642103b1840f616"
+        tags                                           = {
+            "Name" = "technova-prod-privada-1"
+        }
+        # (20 unchanged attributes hidden)
+    }
+
+  # aws_subnet.privada[1] has moved to module.vpc.aws_subnet.privada[1]
+    resource "aws_subnet" "privada" {
+        id                                             = "subnet-0a5aa6d792c632ed1"
+        tags                                           = {
+            "Name" = "technova-prod-privada-2"
+        }
+        # (20 unchanged attributes hidden)
+    }
+
+  # aws_subnet.publica[0] has moved to module.vpc.aws_subnet.publica[0]
+    resource "aws_subnet" "publica" {
+        id                                             = "subnet-007cdb73b44368820"
+        tags                                           = {
+            "Name" = "technova-prod-publica-1"
+        }
+        # (20 unchanged attributes hidden)
+    }
+
+  # aws_subnet.publica[1] has moved to module.vpc.aws_subnet.publica[1]
+    resource "aws_subnet" "publica" {
+        id                                             = "subnet-0e3f9db83a15615af"
+        tags                                           = {
+            "Name" = "technova-prod-publica-2"
+        }
+        # (20 unchanged attributes hidden)
+    }
+
+  # aws_vpc.main has moved to module.vpc.aws_vpc.main
+    resource "aws_vpc" "main" {
+        id                                   = "vpc-05c0ee5354f012bdf"
+        tags                                 = {
+            "Name" = "technova-prod-vpc"
+        }
+        # (19 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 1 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ api_health_url = "http://54.172.209.136/health" -> (known after apply)
+  ~ api_url        = "http://54.172.209.136" -> (known after apply)
+  ~ ec2_public_ip  = "54.172.209.136" -> (known after apply)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "tfplan"
+Releasing state lock. This may take a few moments...

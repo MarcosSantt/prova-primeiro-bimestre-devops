@@ -1,0 +1,61 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_s3_bucket_public_access_block.tfstate will be created
+  + resource "aws_s3_bucket_public_access_block" "tfstate" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = "technova-tfstate-6325127"
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + restrict_public_buckets = true
+    }
+
+  # aws_s3_bucket_server_side_encryption_configuration.tfstate will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "tfstate" {
+      + bucket = "technova-tfstate-6325127"
+      + id     = (known after apply)
+
+      + rule {
+          + apply_server_side_encryption_by_default {
+              + sse_algorithm     = "AES256"
+                # (1 unchanged attribute hidden)
+            }
+        }
+    }
+
+  # aws_s3_bucket_versioning.tfstate will be created
+  + resource "aws_s3_bucket_versioning" "tfstate" {
+      + bucket = "technova-tfstate-6325127"
+      + id     = (known after apply)
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+Plan: 3 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: 
+aws_s3_bucket_public_access_block.tfstate: Creating...
+aws_s3_bucket_server_side_encryption_configuration.tfstate: Creating...
+aws_s3_bucket_versioning.tfstate: Creating...
+aws_s3_bucket_public_access_block.tfstate: Creation complete after 6s [id=technova-tfstate-6325127]
+aws_s3_bucket_server_side_encryption_configuration.tfstate: Creation complete after 7s [id=technova-tfstate-6325127]
+aws_s3_bucket_versioning.tfstate: Creation complete after 8s [id=technova-tfstate-6325127]
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+bucket_name = "technova-tfstate-6325127"
+lock_table_name = "technova-terraform-locks"

@@ -1,0 +1,14 @@
+# Teste de isolamento do RDS a partir da internet - 2026-09-30 23:08
+$ aws rds describe-db-instances (PubliclyAccessible / Endpoint)
+------------------------------------------------------------
+|                    DescribeDBInstances                   |
++-----------+---------+----------------------+-------------+
+| Encrypted | Engine  | PubliclyAccessible   |   Status    |
++-----------+---------+----------------------+-------------+
+|  True     |  16.13  |  False               |  available  |
++-----------+---------+----------------------+-------------+
+
+$ timeout 8 bash -c '</dev/tcp/technova-prod-postgres.cppfc7bahgtv.us-east-1.rds.amazonaws.com/5432'
+bash: linha 1: technova-prod-postgres.cppfc7bahgtv.us-east-1.rds.amazonaws.com: Não há endereço associado com o nome
+bash: linha 1: /dev/tcp/technova-prod-postgres.cppfc7bahgtv.us-east-1.rds.amazonaws.com/5432: Argumento inválido
+Sem conexão (esperado: banco só acessível pela API dentro da VPC)

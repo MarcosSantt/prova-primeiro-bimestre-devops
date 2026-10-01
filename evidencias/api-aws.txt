@@ -1,0 +1,31 @@
+# Testes da API na AWS (EC2 + RDS) - 2026-09-30 23:08
+# URL: http://54.172.209.136
+
+$ curl http://54.172.209.136/health
+{"status":"ok","banco":"conectado"}
+[HTTP 200]
+
+$ curl -X POST http://54.172.209.136/reservas -H Content-Type: application/json -d {"cliente":"Marcos Eduardo","data":"2026-10-15"}
+{"id":1,"cliente":"Marcos Eduardo","data":"2026-10-15","status":"pendente"}
+[HTTP 201]
+
+$ curl http://54.172.209.136/reservas
+[{"id":1,"cliente":"Marcos Eduardo","data":"2026-10-15","status":"pendente"}]
+[HTTP 200]
+
+$ curl http://54.172.209.136/reservas/1
+{"id":1,"cliente":"Marcos Eduardo","data":"2026-10-15","status":"pendente"}
+[HTTP 200]
+
+$ curl -X PUT http://54.172.209.136/reservas/1 -H Content-Type: application/json -d {"cliente":"Marcos Eduardo","data":"2026-10-15","status":"confirmada"}
+{"id":1,"cliente":"Marcos Eduardo","data":"2026-10-15","status":"confirmada"}
+[HTTP 200]
+
+$ curl -X DELETE http://54.172.209.136/reservas/1
+
+[HTTP 204]
+
+$ curl http://54.172.209.136/reservas/1
+{"erro":"Reserva não encontrada"}
+[HTTP 404]
+

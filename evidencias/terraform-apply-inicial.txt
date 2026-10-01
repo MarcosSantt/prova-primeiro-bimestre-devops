@@ -1,3 +1,4 @@
+# Primeiro apply (antes da modularização): criação dos 22 recursos
 ╷
 │ Warning: Deprecated Parameter
 │ 
